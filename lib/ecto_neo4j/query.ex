@@ -684,11 +684,11 @@ defmodule Ecto.Adapters.Neo4j.Query do
 
   @spec stringify_set(SetExpr.t()) :: String.t()
   defp stringify_set(%SetExpr{field: field, increment: increment}) when not is_nil(increment) do
-    "#{stringify_field(field)} = #{stringify_field(field)} + {#{increment}}"
+    "#{stringify_field(field)} = #{stringify_field(field)} + $#{increment}"
   end
 
   defp stringify_set(%SetExpr{field: field, value: value}) do
-    "#{stringify_field(field)} = {#{value}}"
+    "#{stringify_field(field)} = $#{value}"
   end
 
   @spec stringify_batch(Batch.t()) :: String.t()
@@ -730,7 +730,7 @@ defmodule Ecto.Adapters.Neo4j.Query do
   end
 
   defp stringify_limit(limit) when is_atom(limit) do
-    "{#{Atom.to_string(limit)}}"
+    "$#{Atom.to_string(limit)}"
   end
 
   @spec stringify_skip(nil | integer | atom()) :: String.t()
@@ -743,7 +743,7 @@ defmodule Ecto.Adapters.Neo4j.Query do
   end
 
   defp stringify_skip(skip) when is_atom(skip) do
-    "{#{Atom.to_string(skip)}}"
+    "#{Atom.to_string(skip)}"
   end
 
   @spec stringify_field(FieldExpr.t()) :: String.t()

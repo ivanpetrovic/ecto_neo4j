@@ -90,7 +90,7 @@ defmodule Ecto.Adapters.Neo4j.Condition do
         operator: operator,
         value: value
       }) do
-    "#{source}.#{stringify_field(field)} #{stringify_operator(operator)} {#{value}}"
+    "#{source}.#{stringify_field(field)} #{stringify_operator(operator)} $#{value}"
   end
 
   @spec stringify_operator(atom) :: String.t()
