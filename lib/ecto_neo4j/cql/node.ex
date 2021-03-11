@@ -76,7 +76,7 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
       end
     cql = """
     MERGE
-      (n:#{node_label} $#{pk_clause})
+      (n:#{node_label} {#{pk_clause}})
     #{cql_set}
     RETURN
       #{return_data(return)}

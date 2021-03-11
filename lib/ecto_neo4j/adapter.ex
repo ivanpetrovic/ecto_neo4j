@@ -47,6 +47,14 @@ defmodule Ecto.Adapters.Neo4j do
               ),
               to: Ecto.Adapters.Neo4j.Behaviour.Schema
 
+  @spec insert(
+          %{:pid => any, optional(any) => any},
+          %{:schema => atom, :source => any, optional(any) => any},
+          keyword,
+          any,
+          any,
+          keyword
+        ) :: {:error, Bolt.Sips.Error.t()} | {:invalid, [{any, any}, ...]} | {:ok, any}
   defdelegate insert(adapter_meta, schema_meta, fields, on_conflict, returning, options),
     to: Ecto.Adapters.Neo4j.Behaviour.Schema
 
@@ -56,6 +64,9 @@ defmodule Ecto.Adapters.Neo4j do
   @spec insert(Ecto.Repo.t(), Ecto.Schema.t() | Ecto.Changeset.t(), Keyword.t()) ::
           Ecto.Schema.t()
   def insert(repo, data, opts \\ []) do
+    IO.inspect repo, label: "repo"
+    IO.inspect data
+    IO.inspect opts
     repo.insert(data, opts)
     |> Ecto.Adapters.Neo4j.Behaviour.Relationship.process_relationships()
   end
