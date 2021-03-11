@@ -273,7 +273,7 @@ defmodule Ecto.Adapters.Neo4j do
   This will return a `Bolt.Sips.Response`.
 
   ## Example
-      iex> cql = "RETURN {num} AS n"
+      iex> cql = "RETURN $num AS n"
       iex> params = %{num: 5}
       ...> {:ok,
       ...>   %Bolt.Sips.Response{

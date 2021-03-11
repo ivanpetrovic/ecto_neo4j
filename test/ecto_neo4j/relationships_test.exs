@@ -1011,7 +1011,7 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (u:User)-[:WROTE {when: {wrote_when}, nb_read: {wrote_nb_read}}]->(p:Post {uuid: {post_uuid}})
+        (u:User)-[:WROTE {when: $wrote_when, nb_read: $wrote_nb_read}]->(p:Post {uuid: $post_uuid})
       RETURN
         COUNT (p) AS nb_post
       """
