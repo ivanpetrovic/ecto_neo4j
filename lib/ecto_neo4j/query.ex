@@ -743,7 +743,7 @@ defmodule Ecto.Adapters.Neo4j.Query do
   end
 
   defp stringify_skip(skip) when is_atom(skip) do
-    "$#{Atom.to_string(skip)}"
+    "#{Atom.to_string(skip)}"
   end
 
   @spec stringify_field(FieldExpr.t()) :: String.t()
