@@ -3,7 +3,7 @@ Code.require_file("../../deps/ecto/integration_test/support/types.exs", __DIR__)
 defmodule Ecto.Integration.RepoTest do
   use Ecto.Integration.Case, async: false
 
-  alias Ecto.Integration.TestRepo
+  alias Ecto.Integratio
   import Ecto.Query
 
   alias Ecto.Integration.Post
