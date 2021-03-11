@@ -50,8 +50,8 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (u:User {uuid: {user_uuid}})-[rel1:WROTE {when: date({post1_when})}]->(p1:Post {uuid: {post1_uuid}}),
-        (u)-[rel2:WROTE {when: date({post2_when})}]->(p2:Post {uuid: {post2_uuid}}),
+        (u:User {uuid: $user_uuid})-[rel1:WROTE {when: date($post1_when)}]->(p1:Post {uuid: $post1_uuid}),
+        (u)-[rel2:WROTE {when: date($post2_when)}]->(p2:Post {uuid: $post2_uuid}),
         (u)-[rel3:READ]->(p2)
         RETURN
           COUNT(rel1) + COUNT(rel2) + COUNT(rel3) AS nb_rel
@@ -74,15 +74,15 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (u:User {uuid: {user_uuid}}),
-        (up:UserProfile {uuid: {userprofile_uuid}}),
-        (p1:Post {uuid: {post1_uuid}}),
-        (p2:Post {uuid: {post2_uuid}}),
-        (c1:Comment {uuid: {comment1_uuid}}),
-        (c2:Comment {uuid: {comment2_uuid}}),
+        (u:User {uuid: $user_uuid}),
+        (up:UserProfile {uuid: $userprofile_uuid}),
+        (p1:Post {uuid: $post1_uuid}),
+        (p2:Post {uuid: $post2_uuid}),
+        (c1:Comment {uuid: $comment1_uuid}),
+        (c2:Comment {uuid: $comment2_uuid}),
         (u)-[rel0:HAS]->(up),
-        (u)-[rel1:WROTE {when: date({post1_when})}]->(p1),
-        (u)-[rel2:WROTE {when: date({post2_when})}]->(p2),
+        (u)-[rel1:WROTE {when: date($post1_when)}]->(p1),
+        (u)-[rel2:WROTE {when: date($post2_when)}]->(p2),
         (u)-[rel3:READ]->(p2),
         (u)-[rel4:WROTE]->(c1),
         (u)-[rel5:WROTE]->(c2),
@@ -536,8 +536,8 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (new_user: User {uuid: {new_user_uuid}}),
-        (comment:Comment {uuid: {comment_uuid}}),
+        (new_user: User {uuid: $new_user_uuid}),
+        (comment:Comment {uuid: $comment_uuid}),
         (new_user)-[:WROTE]->(comment)
       RETURN
         COUNT(comment) AS nb_comment
@@ -601,9 +601,9 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (new_user: User {uuid: {new_user_uuid}}),
-        (new_post:Post {uuid: {new_post_uuid}}),
-        (comment:Comment {uuid: {comment_uuid}}),
+        (new_user: User {uuid: $new_user_uuid}),
+        (new_post:Post {uuid: $new_post_uuid}),
+        (comment:Comment {uuid: $comment_uuid}),
         (new_user)-[:WROTE]->(comment),
         (new_post)-[:HAS]->(comment)
       RETURN
@@ -652,8 +652,8 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (user: User {uuid: {user_uuid}}),
-        (comment:Comment {uuid: {comment_uuid}})
+        (user: User {uuid: $user_uuid}),
+        (comment:Comment {uuid: $comment_uuid})
       WHERE
         NOT (user)-[:WROTE]->(comment)
       RETURN
@@ -712,7 +712,7 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (user: User {uuid: {user_uuid}}),
+        (user: User {uuid: $user_uuid}),
         (user)-[:WROTE]->(post:Post)
       RETURN
         COUNT(post) AS nb_post
@@ -784,7 +784,7 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (user: User {uuid: {user_uuid}}),
+        (user: User {uuid: $user_uuid}),
         (user)-[:WROTE]->(post:Post)
       RETURN
         COUNT(post) AS nb_post
@@ -834,8 +834,8 @@ defmodule EctoNeo4j.RelationshipsTest do
 
       cql_check = """
       MATCH
-        (user: User {uuid: {user_uuid}}),
-        (user)-[:WROTE]->(post:Post {uuid: {post_uuid}})
+        (user: User {uuid: $user_uuid}),
+        (user)-[:WROTE]->(post:Post {uuid: $post_uuid})
       OPTIONAL MATCH
         (post)-[:HAS]->(comment:Comment)
       RETURN

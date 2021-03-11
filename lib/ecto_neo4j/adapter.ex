@@ -304,8 +304,8 @@ defmodule Ecto.Adapters.Neo4j do
     - `:with_skip` will use `SKIP` and `LIMIT` until every node is touched
 
   In order to work, the query must contains:
-    - for `:basic`, `LIMIT {limit}`
-    - for `:with_skip`, `SKIP {skip} LIMIT {limit}`
+    - for `:basic`, `LIMIT $limit`
+    - for `:with_skip`, `SKIP $skip LIMIT $limit`
     - in any case: `RETURN COUNT(my_nodes) AS nb_touched_nodes` with `my_nodes` being the nodes
       you're working on
 
@@ -321,7 +321,7 @@ defmodule Ecto.Adapters.Neo4j do
       ...> WITH
       ...>   n AS n
       ...> LIMIT
-      ...>   {limit}
+      ...>   $limit
       ...> DETACH DELETE n
       ...> RETURN
       ...>   COUNT(n) AS nb_touched_nodes
@@ -337,11 +337,11 @@ defmodule Ecto.Adapters.Neo4j do
       ...> ORDER BY
       ...>   n.nodeId
       ...> SKIP
-      ...>   {skip}
+      ...>   $skip
       ...> LIMIT
-      ...>   {limit}
+      ...>   $limit
       ...> SET
-      ...>   n.value = {new_value}
+      ...>   n.value = $new_value
       ...> RETURN
       ...>   COUNT(n) AS nb_touched_nodes
       ...> "
@@ -354,7 +354,7 @@ defmodule Ecto.Adapters.Neo4j do
       ...> WITH
       ...>   n AS n
       ...> LIMIT
-      ...>   {limit}
+      ...>   $limit
       ...> DETACH DELETE n
       ...> RETURN
       ...>   COUNT(n) AS nb_touched_nodes
