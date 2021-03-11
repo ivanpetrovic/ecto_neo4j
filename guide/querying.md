@@ -284,7 +284,7 @@ They return a `Bolt.Sips.Response` if case of success
 
 Example:
 ```elixir
-iex> my_query = "RETURN {num} AS num"
+iex> my_query = "RETURN $num AS num"
 iex> Ecto.Adapters.Neo4j.query(my_query, %{num: 5})
 {:ok,
  %Bolt.Sips.Response{

@@ -11,3 +11,5 @@ config :ecto_neo4j, Ecto.Adapters.Neo4j,
   chunk_size: 10_000,
   batch: false,
   bolt_role: :direct
+
+config :logger, :console, level: :error
