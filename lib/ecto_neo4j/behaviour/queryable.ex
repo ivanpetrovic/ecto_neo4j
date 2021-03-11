@@ -194,7 +194,7 @@ defmodule Ecto.Adapters.Neo4j.Behaviour.Queryable do
   As database errors should not be silently ignored, a wrong query will crash.
 
   ### Example
-      Ecto.Adapters.Neo4j.Repo.query("MATCH (n:Post {uuid: {uuid}}", %{uuid: "unique_id"})
+      Ecto.Adapters.Neo4j.Repo.query("MATCH (n:Post {uuid: $uuid}", %{uuid: "unique_id"})
   """
   def query(cql, params \\ %{}, opts \\ []) do
     conn = Keyword.get(opts, :conn, Bolt.Sips.conn())

@@ -46,7 +46,7 @@ defmodule Ecto.Adapters.Neo4j.Query do
       |> Query.params(params)
 
       IO.puts(cql)
-      "MATCH\\n  (n:User)\\n\\nWHERE\\n  n.uuid = {user_uuid}\\n\\n\\n\\n\\n\\nRETURN\\n  n\\n\\n\\n\\n\\n"
+      "MATCH\\n  (n:User)\\n\\nWHERE\\n  n.uuid = $user_uuid\\n\\n\\n\\n\\n\\nRETURN\\n  n\\n\\n\\n\\n\\n"
 
       IO.inspect(params)
       %{user_uuid: "my-user-uid"}

@@ -74,7 +74,6 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
           #{Enum.join(data_to_set, ",  \n")}
         """
       end
-
     cql = """
     MERGE
       (n:#{node_label} $#{pk_clause})
@@ -82,6 +81,7 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
     RETURN
       #{return_data(return)}
     """
+
 
     {cql, data}
   end
@@ -504,9 +504,9 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
       WITH
         n AS n
       SKIP
-        {skip}
+        $skip
       LIMIT
-        {limit}
+        $limit
       SET
         n.title = n.titttle
       REMOVE
@@ -523,9 +523,9 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
     WITH
       n AS n
     SKIP
-      {skip}
+      $skip
     LIMIT
-      {limit}
+      $limit
     SET
       n.#{new_name} = n.#{old_name}
     REMOVE
@@ -546,7 +546,7 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
       WITH
         n AS n
       LIMIT
-        {limit}
+        $limit
       SET
         n:NewPost
       REMOVE
@@ -563,7 +563,7 @@ defmodule Ecto.Adapters.Neo4j.Cql.Node do
     WITH
       n AS n
     LIMIT
-      {limit}
+      $limit
     SET
       n:#{new_label}
     REMOVE
