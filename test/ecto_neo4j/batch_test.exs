@@ -28,7 +28,7 @@ defmodule Ecto.Adapters.Neo4j.BatchTest do
     WITH
       n AS n
     LIMIT
-      {limit}
+      $limit
     SET
       n.touched = true
     RETURN
@@ -57,9 +57,9 @@ defmodule Ecto.Adapters.Neo4j.BatchTest do
       n AS n
       ORDER By n.title
     SKIP
-      {skip}
+      $skip
     LIMIT
-      {limit}
+      $limit
     SET
       n.touched = true
     RETURN
@@ -88,9 +88,9 @@ defmodule Ecto.Adapters.Neo4j.BatchTest do
       n AS n
       ORDER By n.title
     SKIP
-      {skip}
+      $skip
     LIMIT
-      {limit}
+      $limit
     SET
       n.touched = true
     RETURN

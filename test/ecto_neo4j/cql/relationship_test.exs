@@ -1,9 +1,9 @@
 defmodule EctoNeo4j.Cql.RelationshipTest do
   use ExUnit.Case, async: false
   @moduletag :supported
+  doctest Ecto.Adapters.Neo4j.Cql.Relationship
 
   alias Ecto.Adapters.Neo4j.Cql.Relationship, as: RelationshipCql
-
   test "get_related/3" do
     cql = """
     MATCH

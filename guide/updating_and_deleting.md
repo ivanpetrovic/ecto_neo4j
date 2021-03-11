@@ -258,7 +258,7 @@ They works on the same logic:
 ### Batch types
 #### :basic
 The default batch type is `:basic`. Query must have:  
-  - `LIMIT {limit}` in order to specify the chunk size
+  - `LIMIT $limit` in order to specify the chunk size
   - returns `RETURN COUNT(the_node_you_re_touching) AS nb_touched_nodes` in order to have the count of touched nodes.  
 This batch type is usually used for `delete` operation.  
 It is not required to provide the `limit` in your `params`, it will be handled by `batch_query`.   
@@ -272,7 +272,7 @@ WHERE
   n.title CONTAINS "this"
 WITH                            <--- The `WITH` allows to work on a subset...
   n AS n                        <--- 
-LIMIT {limit}                   <--- with the specified nuber of node
+LIMIT $limit                   <--- with the specified nuber of node
 DETACH DELETE                   <--- Perform the desired operation
   n
 RETURN
@@ -283,7 +283,7 @@ Ecto.Adapters.Neo4j.batch_query(cql)
 
 #### :with_skip
 This batch type is useful where a simple `COUNT` is irrevelant (in update operation for example). Query must have:  
-  - `SKIP {skip} LIMIT {limit}` in order to specify the chunk size
+  - `SKIP $skip LIMIT $limit` in order to specify the chunk size
   - returns `RETURN COUNT(the_node_you_re_touching) AS nb_touched_nodes` in order to have the count of touched nodes.  
 It is not required to provide the `skip` nor the `limit` in your `params`, they will be handled by `batch_query`.   
 
@@ -296,7 +296,7 @@ WHERE
   n.title CONTAINS "this"
 WITH                                <--- THe WITH allows to work on a subset...
   n AS n                            <--- 
-SKIP {skip} LIMIT {limit}           <--- with the specified nuber of node
+SKIP $skip LIMIT $limit             <--- with the specified nuber of node
 SET                                 <--- Perform the desired operation
   n.title = "Updated: " + n.title 
 RETURN
